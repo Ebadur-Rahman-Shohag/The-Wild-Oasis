@@ -1,8 +1,9 @@
+import Spinner from "@/app/_components/Spinner"
 
 
 function Loading() {
   return (
-    <div>Loading Data....</div>
+    <div><Spinner/></div>
   )
 }
 
