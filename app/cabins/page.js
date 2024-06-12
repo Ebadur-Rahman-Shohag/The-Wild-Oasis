@@ -2,6 +2,13 @@ import CabinList from "../_components/CabinList";
 import React, { Suspense } from "react";
 import Spinner from "../_components/Spinner";
 
+export const metadata = {
+  title: "Cabins",
+};
+
+// Manage cache data
+// export const revalidate = 0;
+
 export default function Page() {
   // CHANGE
 
