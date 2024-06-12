@@ -1,9 +1,11 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { notFound } from "next/navigation";
+
 /////////////
 // GET
 
+// Function to fetch details of a specific cabin by its ID
 export async function getCabin(id) {
   const { data, error } = await supabase
     .from("cabins")
@@ -15,12 +17,14 @@ export async function getCabin(id) {
   // await new Promise((res) => setTimeout(res, 1000));
 
   if (error) {
-    notFound()
+    // Redirect to 404 page if cabin is not found
+    notFound();
   }
 
   return data;
 }
 
+// Function to fetch price details of a specific cabin by its ID
 export async function getCabinPrice(id) {
   const { data, error } = await supabase
     .from("cabins")
@@ -35,6 +39,7 @@ export async function getCabinPrice(id) {
   return data;
 }
 
+// Function to fetch details of all cabins
 export const getCabins = async function () {
   const { data, error } = await supabase
     .from("cabins")
@@ -52,6 +57,7 @@ export const getCabins = async function () {
   return data;
 };
 
+// Function to fetch guest details by email
 export async function getGuest(email) {
   const { data, error } = await supabase
     .from("guests")
@@ -63,6 +69,7 @@ export async function getGuest(email) {
   return data;
 }
 
+// Function to fetch details of a specific booking by its ID
 export async function getBooking(id) {
   const { data, error, count } = await supabase
     .from("bookings")
@@ -78,6 +85,7 @@ export async function getBooking(id) {
   return data;
 }
 
+// Function to fetch all bookings of a specific guest by their guest ID
 export async function getBookings(guestId) {
   const { data, error, count } = await supabase
     .from("bookings")
@@ -96,6 +104,7 @@ export async function getBookings(guestId) {
   return data;
 }
 
+// Function to fetch all booked dates for a specific cabin by its ID
 export async function getBookedDatesByCabinId(cabinId) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
@@ -126,6 +135,7 @@ export async function getBookedDatesByCabinId(cabinId) {
   return bookedDates;
 }
 
+// Function to fetch settings details
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
 
@@ -137,6 +147,7 @@ export async function getSettings() {
   return data;
 }
 
+// Function to fetch details of all countries
 export async function getCountries() {
   try {
     const res = await fetch(
@@ -153,6 +164,7 @@ export async function getCountries() {
 /////////////
 // CREATE
 
+// Function to create a new guest
 export async function createGuest(newGuest) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
@@ -164,6 +176,7 @@ export async function createGuest(newGuest) {
   return data;
 }
 
+// Function to create a new booking
 export async function createBooking(newBooking) {
   const { data, error } = await supabase
     .from("bookings")
@@ -183,46 +196,5 @@ export async function createBooking(newBooking) {
 /////////////
 // UPDATE
 
-// The updatedFields is an object which should ONLY contain the updated data
-export async function updateGuest(id, updatedFields) {
-  const { data, error } = await supabase
-    .from("guests")
-    .update(updatedFields)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Guest could not be updated");
-  }
-  return data;
-}
-
-export async function updateBooking(id, updatedFields) {
-  const { data, error } = await supabase
-    .from("bookings")
-    .update(updatedFields)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Booking could not be updated");
-  }
-  return data;
-}
-
-/////////////
-// DELETE
-
-export async function deleteBooking(id) {
-  const { data, error } = await supabase.from("bookings").delete().eq("id", id);
-
-  if (error) {
-    console.error(error);
-    throw new Error("Booking could not be deleted");
-  }
-  return data;
-}
+// Function to update guest details by their ID
+// The updatedFields is an object which should ONLY contain

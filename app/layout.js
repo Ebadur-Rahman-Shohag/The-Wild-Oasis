@@ -6,17 +6,18 @@ import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
 
 /*
-// The `Josefin_Sans` function is used to configure the font import with specific options.
-// - `subsets: ["latin"]`: This specifies that only the Latin subset of the font should be loaded.
-// - `display: "swap"`: This sets the font-display property to "swap", which improves loading performance
-//   by using a fallback font until the custom font loads, avoiding invisible text.
+  The `Josefin_Sans` function is used to configure the font import with specific options.
+  - `subsets: ["latin"]`: This specifies that only the Latin subset of the font should be loaded.
+  - `display: "swap"`: This sets the font-display property to "swap", which improves loading performance
+    by using a fallback font until the custom font loads, avoiding invisible text.
 */
+
 const josefin = Josefin_Sans({
   subsets: ["latin"],
   display: "swap",
 });
 
-//meta data
+// Metadata for the page
 export const metadata = {
   title: {
     template: "%s / The Wild Oasis",
@@ -26,15 +27,16 @@ export const metadata = {
     "Luxurious cabin hotel, located in the heart of the Italian Dolomites, surrounded by beautiful mountains and dark forests",
 };
 
-//RSC
+// RootLayout component
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen flex flex-col`}
-      >
+      {/* Set the font class and background/text color for the body */}
+      <body className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen flex flex-col`}>
+        {/* Render the Header component */}
         <Header />
         <div className="flex-1 px-8 py-12 grid">
+          {/* Render the children components */}
           <main className="max-w-7xl mx-auto w-full">{children}</main>
         </div>
       </body>

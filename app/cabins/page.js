@@ -2,21 +2,25 @@ import CabinList from "../_components/CabinList";
 import React, { Suspense } from "react";
 import Spinner from "../_components/Spinner";
 
+// Metadata for the page, used by the framework for SEO or other purposes
 export const metadata = {
   title: "Cabins",
 };
 
-// Manage cache data
+// Disable revalidation (cache) for this page
 // export const revalidate = 0;
 
 export default function Page() {
-  // CHANGE
+  // The main page component for displaying the list of luxury cabins
 
   return (
     <div>
+      {/* Page title */}
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
         Our Luxury Cabins
       </h1>
+
+      {/* Page description */}
       <p className="text-primary-200 text-lg mb-10">
         Cozy yet luxurious cabins, located right in the heart of the Italian
         Dolomites. Imagine waking up to beautiful mountain views, spending your
@@ -25,17 +29,11 @@ export default function Page() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
+
+      {/* Suspense component to handle lazy loading of CabinList */}
       <Suspense fallback={<Spinner />}>
         <CabinList />
       </Suspense>
     </div>
   );
 }
-
-//*******************Data Fetching**************************
-//In Next.js we should fetch data in React Server Component. This component is a React server component. So here we can fetch data.
-
-//*********************Data Passing**************************************
-//We can pass data from React Server Component to React Client Component via props.
-// Ex: Here we passing the users data from this component to Counter Component. Counter Component is a React Client Component.
-// We can not use React Hooks in React Server Component

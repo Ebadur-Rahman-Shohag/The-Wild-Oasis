@@ -3,16 +3,21 @@ import about1 from "@/public/about-1.jpg";
 import about2 from "@/public/about-2.jpg";
 import { getCabins } from "../_lib/data-service";
 
+// Metadata for the page, used by the framework for SEO or other purposes
 export const metadata = {
   title: "About",
 };
-//Manage cache data
+
+// Cache data for 1 hour (3600 seconds)
 export const revalidate = 3600;
 
 export default async function Page() {
+  // Fetch the list of cabins from the data service
   const cabins = await getCabins();
+
   return (
     <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
+      {/* Section with title and description */}
       <div className="col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
           Welcome to The Wild Oasis
@@ -40,6 +45,7 @@ export default async function Page() {
         </div>
       </div>
 
+      {/* Image of a family sitting around a fire pit in front of a cabin */}
       <div className="col-span-2">
         <Image
           src={about1}
@@ -47,6 +53,7 @@ export default async function Page() {
         />
       </div>
 
+      {/* Image of the family that manages The Wild Oasis */}
       <div className="relative aspect-square col-span-2">
         <Image
           src="/about-2.jpg"
@@ -56,6 +63,7 @@ export default async function Page() {
         />
       </div>
 
+      {/* Section with title and description about the family management */}
       <div className="col-span-3">
         <h1 className="text-4xl mb-10 text-accent-400 font-medium">
           Managed by our family since 1962
@@ -69,14 +77,15 @@ export default async function Page() {
             dedication to creating a warm, welcoming environment.
           </p>
           <p>
-            Over the years, we&apos; ve maintained the essence of The Wild
+            Over the years, we&apos;ve maintained the essence of The Wild
             Oasis, blending the timeless beauty of the mountains with the
-            personal touch only a family business can offer. Here, you&apos; re
-            not just a guest; you&apos; re part of our extended family. So join
+            personal touch only a family business can offer. Here, you&apos;re
+            not just a guest; you&apos;re part of our extended family. So join
             us at The Wild Oasis soon, where tradition meets tranquility, and
             every visit is like coming home.
           </p>
 
+          {/* Button linking to the cabins page */}
           <div>
             <a
               href="/cabins"

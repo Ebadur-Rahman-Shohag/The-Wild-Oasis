@@ -1,3 +1,4 @@
+// Define the NotFound component, which displays a message indicating that the page could not be found and provides a link to go back home.
 function NotFound() {
     return (
         <main className='text-center space-y-6 mt-4'>

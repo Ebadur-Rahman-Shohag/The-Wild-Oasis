@@ -1,16 +1,18 @@
+import Image from "next/image";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
 import DeleteReservation from "@/app/_components/DeleteReservation";
 
+// Function to format the distance from the current date
 export const formatDistanceFromNow = (dateStr) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
 function ReservationCard({ booking }) {
+  // Destructure properties from the booking object
   const {
     id,
-    guestId,
     startDate,
     endDate,
     numNights,
@@ -23,19 +25,24 @@ function ReservationCard({ booking }) {
 
   return (
     <div className="flex border border-primary-800">
+      {/* Image section */}
       <div className="relative h-32 aspect-square">
-        <img
+        <Image
+          fill
           src={image}
           alt={`Cabin ${name}`}
           className="object-cover border-r border-primary-800"
         />
       </div>
 
+      {/* Details section */}
       <div className="flex-grow px-6 py-3 flex flex-col">
         <div className="flex items-center justify-between">
+          {/* Display cabin name and status */}
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {name}
           </h3>
+          {/* Display status (past or upcoming) */}
           {isPast(new Date(startDate)) ? (
             <span className="bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
               past
@@ -47,6 +54,7 @@ function ReservationCard({ booking }) {
           )}
         </div>
 
+        {/* Display date range */}
         <p className="text-lg text-primary-300">
           {format(new Date(startDate), "EEE, MMM dd yyyy")} (
           {isToday(new Date(startDate))
@@ -55,6 +63,7 @@ function ReservationCard({ booking }) {
           ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
         </p>
 
+        {/* Display total price, number of guests, and booking date */}
         <div className="flex gap-5 mt-auto items-baseline">
           <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
           <p className="text-primary-300">&bull;</p>
@@ -67,7 +76,9 @@ function ReservationCard({ booking }) {
         </div>
       </div>
 
+      {/* Action section */}
       <div className="flex flex-col border-l border-primary-800 w-[100px]">
+        {/* Edit button */}
         <a
           href={`/account/reservations/edit/${id}`}
           className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 border-b border-primary-800 flex-grow px-3 hover:bg-accent-600 transition-colors hover:text-primary-900"
@@ -75,6 +86,7 @@ function ReservationCard({ booking }) {
           <PencilSquareIcon className="h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors" />
           <span className="mt-1">Edit</span>
         </a>
+        {/* Delete button */}
         <DeleteReservation bookingId={id} />
       </div>
     </div>

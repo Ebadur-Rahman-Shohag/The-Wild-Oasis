@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 function CabinCard({ cabin }) {
+  // Destructure properties from the cabin object
   const { id, name, maxCapacity, regularPrice, discount, image } = cabin;
 
   return (
     <div className="flex border-primary-800 border">
+      {/* Image section */}
       <div className="flex-1 relative">
         <Image
           src={image}
@@ -15,12 +17,16 @@ function CabinCard({ cabin }) {
           className="object-cover border-r border-primary-800"
         />
       </div>
+
+      {/* Details section */}
       <div className="flex-grow">
         <div className="pt-5 pb-4 px-7 bg-primary-950">
+          {/* Cabin name */}
           <h3 className="text-accent-500 font-semibold text-2xl mb-3">
             Cabin {name}
           </h3>
 
+          {/* Capacity information */}
           <div className="flex gap-3 items-center mb-2">
             <UsersIcon className="h-5 w-5 text-primary-600" />
             <p className="text-lg text-primary-200">
@@ -28,6 +34,7 @@ function CabinCard({ cabin }) {
             </p>
           </div>
 
+          {/* Pricing information */}
           <p className="flex gap-3 justify-end items-baseline">
             {discount > 0 ? (
               <>
@@ -45,6 +52,7 @@ function CabinCard({ cabin }) {
           </p>
         </div>
 
+        {/* Link to cabin details and reservation */}
         <div className="bg-primary-950 border-t border-t-primary-800 text-right">
           <Link
             href={`/cabins/${id}`}
