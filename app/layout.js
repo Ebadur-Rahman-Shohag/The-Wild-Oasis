@@ -1,9 +1,10 @@
-import Logo from "@/app/_components/Logo";
-import Navigation from "@/app/_components/Navigation";
+// import Logo from "@/app/_components/Logo";
+// import Navigation from "@/app/_components/Navigation";
 import "@/app/_styles/globals.css";
 // Importing the Josefin Sans font from Google Fonts using the next/font/google module.
 import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
+import { ReservationProvider } from "./contextAPI/ReservationContext";
 
 /*
   The `Josefin_Sans` function is used to configure the font import with specific options.
@@ -32,12 +33,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       {/* Set the font class and background/text color for the body */}
-      <body className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen flex flex-col`}>
+      <body
+        className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen flex flex-col`}
+      >
         {/* Render the Header component */}
         <Header />
         <div className="flex-1 px-8 py-12 grid">
           {/* Render the children components */}
-          <main className="max-w-7xl mx-auto w-full">{children}</main>
+          <main className="max-w-7xl mx-auto w-full">
+            <ReservationProvider>{children}</ReservationProvider>
+          </main>
         </div>
       </body>
     </html>

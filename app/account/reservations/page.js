@@ -1,4 +1,5 @@
 import ReservationCard from "@/app/_components/ReservationCard";
+import Link from "next/link";
 
 // Metadata for the page, used for SEO or other purposes
 export const metadata = {
@@ -22,9 +23,9 @@ export default function Page() {
         // Message when no reservations are available
         <p className="text-lg">
           You have no reservations yet. Check out our
-          <a className="underline text-accent-500" href="/cabins">
+          <Link className="underline text-accent-500" href="/cabins">
             luxury cabins &rarr;
-          </a>
+          </Link>
         </p>
       ) : (
         // List of reservations

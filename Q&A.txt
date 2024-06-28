@@ -1,0 +1,30 @@
+(1) What is searchParams in next.js?
+In Next.js, searchParams has two different contexts depending on whether you're working with a Client Component or a Server Component:
+
+1. Client Components:
+
+searchParams is a hook provided by next/navigation (import { useSearchParams } from 'next/navigation').
+It returns a read-only version of the URLSearchParams interface, allowing you to access the current URL's query string parameters.
+
+2. Server Components:
+
+searchParams is not directly available as a hook.
+It's passed as a prop to the page component function when using data fetching methods like getServerSideProps.
+It's a plain JavaScript object containing the query string parameters.
+Key Points:
+
+Client-side access: Use the useSearchParams hook in Client Components to access and manipulate search parameters on the client-side (browser).
+Server-side access: In Server Components, searchParams is a prop received from the data fetching method. You can use it to access query string parameters during server-side rendering.
+Dynamic API: searchParams is considered a Dynamic API because its values cannot be known in advance during static rendering. This means pages that use searchParams might require additional processing on the server or client.
+Here's a table summarizing the differences:
+
+Context	Access Method	Type
+Client Components	useSearchParams hook	Read-only URLSearchParams interface
+Server Components (pre-rendering)	Passed as a prop to the page component function	Plain JavaScript object
+
+drive_spreadsheet
+Export to Sheets
+Additional Considerations:
+
+In Next.js versions before 13.4, useSearchParams might return null for compatibility reasons during migrations.
+For manipulating query strings in Next.js applications, consider using the useRouter hook provided by next/router.

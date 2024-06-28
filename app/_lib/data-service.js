@@ -14,7 +14,7 @@ export async function getCabin(id) {
     .single();
 
   // For testing
-  // await new Promise((res) => setTimeout(res, 1000));
+  // await new Promise((res) => setTimeout(res, 2000));
 
   if (error) {
     // Redirect to 404 page if cabin is not found
@@ -138,6 +138,8 @@ export async function getBookedDatesByCabinId(cabinId) {
 // Function to fetch settings details
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
+
+  // await new Promise((res) => setTimeout(res, 3000));
 
   if (error) {
     console.error(error);
