@@ -1,4 +1,7 @@
 import ReservationCard from "@/app/_components/ReservationCard";
+import ReservationList from "@/app/_components/ReservationList";
+import { auth } from "@/app/_lib/auth";
+import { getBookings } from "@/app/_lib/data-service";
 import Link from "next/link";
 
 // Metadata for the page, used for SEO or other purposes
@@ -7,9 +10,10 @@ export const metadata = {
 };
 
 // Component for displaying user reservations
-export default function Page() {
-  // CHANGE
-  const bookings = []; // Placeholder for user reservations
+export default async function Page() {
+  const session = await auth();
+
+  const bookings = await getBookings(session.user.guestId);
 
   return (
     <div>
@@ -29,11 +33,7 @@ export default function Page() {
         </p>
       ) : (
         // List of reservations
-        <ul className="space-y-6">
-          {bookings.map((booking) => (
-            <ReservationCard booking={booking} key={booking.id} />
-          ))}
-        </ul>
+        <ReservationList bookings={bookings} />
       )}
     </div>
   );
